@@ -19,6 +19,7 @@ import sys
 from data_utils import Database
 from models.category import Category
 
+
 def catch_exceptions(t, val, tb):
     QtWidgets.QMessageBox.critical(None,
                                    "An exception was raised",
@@ -76,14 +77,26 @@ class AppFin(Ui_MainWindow):
         self.categoryListViewModel.removeRow(selected_item.row())
         self.db.remove_category(selected_item.data())
 
+    def set_adding_new_expense(self):
+        self.addNewExpenseButton.clicked.connect(self.print_sth)
 
-if __name__ == "__main__":
+    def print_sth(self):
+        print("I was clicked")
+        print(self.expenseDescriptionEdit.toPlainText())
+
+
+def main():
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    AppFin = AppFin()
-    AppFin.setupUi(MainWindow)
-    AppFin.add_logging_func()
-    AppFin.set_addExpense_UI()
-    AppFin.set_AddCategory_UI()
+    app_f = AppFin()
+    app_f.setupUi(MainWindow)
+    app_f.add_logging_func()
+    app_f.set_addExpense_UI()
+    app_f.set_AddCategory_UI()
+    app_f.set_adding_new_expense()
     MainWindow.show()
     sys.exit(app.exec_())
+
+
+if __name__ == "__main__":
+    main()
