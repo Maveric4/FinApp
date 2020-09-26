@@ -2,7 +2,7 @@
 ##Mine
 .idea/
 test.py
-*.ui
+
 
 ##
 __pycache__/
