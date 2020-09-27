@@ -3,10 +3,14 @@ import mariadb
 
 class Database:
     def __init__(self, db_name):
-        self.db_name = db_name
-        self.conn = self.connect()
-        self.conn.autocommit = True
-        self.cur = self.conn.cursor()
+        try:
+            self.db_name = db_name
+            self.conn = self.connect()
+            self.conn.autocommit = True
+            self.cur = self.conn.cursor()
+        except Exception as e:
+            print("Cannot connect to database.")
+            print(e)
 
     def connect(self):
         try:
@@ -35,12 +39,12 @@ class Database:
     def remove_category(self, category_name, table_name="categories"):
         self.cur.execute(f"DELETE FROM {self.db_name}.{table_name} WHERE Name = ?", [category_name])
 
+
 if __name__ == "__main__":
     db = Database(db_name="finapp")
-    # from models.category import Category
-    # cat = Category("Domowe")
-    # db.remove_category(cat)
-    data = db.get_data_from_table(table_name="categories")
-    print([x[1] for x in data])
+    from models.category import Category
+    cat = Category(None)
+    db.remove_category(cat.name)
+    print(db.get_categories())
 
 

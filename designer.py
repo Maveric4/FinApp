@@ -73,6 +73,9 @@ class Ui_MainWindow(object):
         self.deleteCategoryButton = QtWidgets.QPushButton(self.addCategoryTab)
         self.deleteCategoryButton.setGeometry(QtCore.QRect(860, 470, 191, 51))
         self.deleteCategoryButton.setObjectName("deleteCategoryButton")
+        self.label = QtWidgets.QLabel(self.addCategoryTab)
+        self.label.setGeometry(QtCore.QRect(80, 40, 161, 16))
+        self.label.setObjectName("label")
         self.tabWidget.addTab(self.addCategoryTab, "")
         self.passwordEdit = QtWidgets.QTextEdit(self.centralwidget)
         self.passwordEdit.setGeometry(QtCore.QRect(990, 630, 181, 31))
@@ -102,12 +105,15 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuUser.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.expenseDescriptionEdit.setPlaceholderText(_translate("MainWindow", "Type expense description"))
+        self.priceEdit.setPlaceholderText(_translate("MainWindow", "Type price"))
+        self.categoryComboBox.setPlaceholderText(_translate("MainWindow", "Choose category"))
         self.addNewExpenseButton.setText(_translate("MainWindow", "Add expense"))
         self.expenseDescriptionLabel.setText(_translate("MainWindow", "Expense description"))
         self.priceLabel.setText(_translate("MainWindow", "Price"))
@@ -117,6 +123,7 @@ class Ui_MainWindow(object):
         self.addCategoryButton.setText(_translate("MainWindow", "Add category"))
         self.categoriesLabel.setText(_translate("MainWindow", "Categories:"))
         self.deleteCategoryButton.setText(_translate("MainWindow", "Delete category"))
+        self.label.setText(_translate("MainWindow", "Category name"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.addCategoryTab), _translate("MainWindow", "Add category"))
         self.passwordEdit.setPlaceholderText(_translate("MainWindow", "Type password"))
         self.LogInButton.setText(_translate("MainWindow", "Login"))

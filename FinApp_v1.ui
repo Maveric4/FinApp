@@ -36,7 +36,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="movable">
      <bool>false</bool>
@@ -60,6 +60,9 @@
         <height>51</height>
        </rect>
       </property>
+      <property name="placeholderText">
+       <string>Type expense description</string>
+      </property>
      </widget>
      <widget class="QTextEdit" name="priceEdit">
       <property name="geometry">
@@ -69,6 +72,9 @@
         <width>191</width>
         <height>51</height>
        </rect>
+      </property>
+      <property name="placeholderText">
+       <string>Type price</string>
       </property>
      </widget>
      <widget class="QDateEdit" name="expenseDateEdit">
@@ -92,6 +98,9 @@
         <width>191</width>
         <height>51</height>
        </rect>
+      </property>
+      <property name="placeholderText">
+       <string>Choose category</string>
       </property>
      </widget>
      <widget class="QPushButton" name="addNewExpenseButton">
@@ -227,6 +236,19 @@
       </property>
       <property name="text">
        <string>Delete category</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>40</y>
+        <width>161</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Category name</string>
       </property>
      </widget>
     </widget>
