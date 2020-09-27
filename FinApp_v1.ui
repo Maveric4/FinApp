@@ -36,7 +36,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <property name="movable">
      <bool>false</bool>
@@ -168,6 +168,27 @@
        <string>Category</string>
       </property>
      </widget>
+     <widget class="QLabel" name="infoTopLabel">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>1101</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="addCategoryTab">
      <property name="minimumSize">
@@ -238,7 +259,7 @@
        <string>Delete category</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="categoryNameLabel">
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -249,6 +270,21 @@
       </property>
       <property name="text">
        <string>Category name</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="showExpensesTab">
+     <attribute name="title">
+      <string>Show Expenses</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>70</y>
+        <width>921</width>
+        <height>551</height>
+       </rect>
       </property>
      </widget>
     </widget>
