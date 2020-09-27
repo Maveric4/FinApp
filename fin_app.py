@@ -20,6 +20,7 @@ from data_utils import Database
 from models.category import Category
 from models.expense import Expense
 from warning import show_dialog
+from datetime import datetime, timedelta
 
 old_hook = sys.excepthook
 sys.excepthook = catch_exceptions
@@ -57,16 +58,17 @@ class AppFin(Ui_MainWindow):
         self.deleteCategoryButton.clicked.connect(self.delete_category)
 
     def set_showExpenses_UI(self):
-        self.tableWidget.horizontalHeader().setStretchLastSection(True)
-        self.tableWidget.setWordWrap(True)
-        self.tableWidget.setTextElideMode(QtCore.Qt.ElideLeft)
-        table_data, column_names = self.db.get_expenses()
-        self.tableWidget.setColumnCount(4)
-        self.tableWidget.setHorizontalHeaderLabels(column_names)
-        for row_number, row_data in enumerate(table_data):
-            self.tableWidget.insertRow(row_number)
-            for col_number, data in enumerate(row_data):
-                self.tableWidget.setItem(row_number, col_number, QtWidgets.QTableWidgetItem(str(data)))
+        ## Filters settings
+        first_day = datetime.today().date().replace(day=1)
+        last_day = first_day.replace(month=first_day.month+1) - timedelta(days=1)
+        self.startDateEdit.setCalendarPopup(True)
+        self.startDateEdit.setDateTime(QtCore.QDateTime.fromString(first_day.strftime('%Y-%m-%d'), "yyyy-MM-dd"))
+        self.endDateEdit.setCalendarPopup(True)
+        self.endDateEdit.setDateTime(QtCore.QDateTime.fromString(last_day.strftime('%Y-%m-%d'), "yyyy-MM-dd"))
+
+        self.expensesFilterButton.clicked.connect(self.filter_expenses)
+        ## Expense Table settings
+        self.fill_expenses_table(self.db.get_expenses())
 
     def login(self):
         if self.loginEdit.toPlainText() == "dan" and self.passwordEdit.toPlainText() == "dan":
@@ -108,6 +110,24 @@ class AppFin(Ui_MainWindow):
         self.categoryListViewModel.removeRow(selected_item.row())
         self.categoryComboBox.clear()
         self.categoryComboBox.addItems(self.db.get_categories())
+
+    def filter_expenses(self):
+        start_date = self.startDateEdit.date().toPyDate()
+        end_date = self.endDateEdit.date().toPyDate()
+        self.fill_expenses_table(self.db.get_expenses_within_date_range(start_date, end_date))
+
+    def fill_expenses_table(self, model):
+        self.expensesTableWidget.clear()
+        self.expensesTableWidget.horizontalHeader().setStretchLastSection(True)
+        self.expensesTableWidget.setWordWrap(True)
+        self.expensesTableWidget.setTextElideMode(QtCore.Qt.ElideLeft)
+        table_data, column_names = model
+        self.expensesTableWidget.setColumnCount(4)
+        self.expensesTableWidget.setRowCount(len(table_data))
+        self.expensesTableWidget.setHorizontalHeaderLabels(column_names)
+        for row_number, row_data in enumerate(table_data):
+            for col_number, data in enumerate(row_data):
+                self.expensesTableWidget.setItem(row_number, col_number, QtWidgets.QTableWidgetItem(str(data)))
 
 
 def main():
